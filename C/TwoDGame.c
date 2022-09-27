@@ -1,25 +1,26 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main() {
 
-    char map[20][100] = [0];
-    map = [20][100];
+int main(int args, char* argv[]) {
+
+    char map[20][100] = { 0 };
     map[2][2] = "P";
-    bool proceed = true;
-    bool argsCheck = false;
+    int proceed = 0; //true
+    int argsCheck = 1; //false
 
     int argsRunIndex = 0;
 
-    char directions[4] = {"North", "East", "South", "West"};
+    const char* directions[4] = {"North", "East", "South", "West"};
     int directionX[4] = {0, -1, 0, 1};
     int directionY[4] = {1, 0, -1, 0};
 
     int currentDirection = 0;
 
-    int currentPosition[2] = {2,2};
+    int currentPosition[] = {2,2};
 
-    if(args.length > 0) {
-        argsCheck = true;
+    if(strln(args) > 0) {
+        argsCheck = 0; //true
     }
     while (proceed) {
         for (int i = 0; i < 20; i++) {
@@ -37,20 +38,20 @@ int main() {
         char input;
 
         if (!argsCheck) {
-            input = reader.readLine(); //NEED TO FIX 
+            scanf("%s", input); 
         } else {
-            if (argsRunIndex == args.length) {
-                argsCheck = false;
-                input = "e";
+            if (argsRunIndex == strlen(args)) {
+                argsCheck = 1; //false
+                *input = *"e";
             } else {
-                input = args[argsRunIndex];
+                *input = *argv[argsRunIndex];
                 argsRunIndex++;
             }
 
         
         }
         switch(input){
-                case "w":
+                case 'w':
                     map[currentPosition[1]][currentPosition[0]] = "#";
                     //saves the trail of where you have been
                     if(!((currentPosition[0] - directionX[currentDirection] < 0) || (currentPosition[0] - directionX[currentDirection] > 100)||(currentPosition[1] - directionY[currentDirection] < 0) || (currentPosition[1] - directionY[currentDirection] > 20))){
@@ -63,14 +64,14 @@ int main() {
                     map[currentPosition[1]][currentPosition[0]] = "P";
                     //puts your player icon down
                     break;
-                case "a":
+                case 'a':
                     currentDirection--;
                     //moves your index up or down the 3 arrays listed above
                     if(currentDirection < 0){
                         currentDirection = 3;
                     }
                     break;
-                case "d":
+                case 'd':
                     currentDirection++;
                     //moves your index up or down the 3 arrays listed above
 
@@ -78,16 +79,16 @@ int main() {
                         currentDirection = 0;
                     }
                     break;
-                case "e":
-                    System.out.println("You are facing in the "+directions[currentDirection]+"ward direction!");
+                case 'e':
+                    printf("You are facing in the %i ward direction!", directions[currentDirection]);
                     break;
-                case "q":
+                case 'q':
 
-                    proceed = false;
+                    proceed = 0; //true
                     break;
                 
                 default:
-                    System.out.println("You must enter one of the commands!");
+                    printf("You must enter one of the commands!");
 
             }
     }
