@@ -2,10 +2,11 @@
 #include <stdlib.h>
 
 
-int main(int args, char* argv[]) {
+int main(int argc, char* argv[]) {
 
     char map[20][100] = { 0 };
-    map[2][2] = "P";
+    char *p = "P";
+    map[2][2] = &p; //ERROR
     int proceed = 0; //true
     int argsCheck = 1; //false
 
@@ -19,16 +20,16 @@ int main(int args, char* argv[]) {
 
     int currentPosition[] = {2,2};
 
-    if(strln(args) > 0) {
+    if(argc > 0) {
         argsCheck = 0; //true
     }
     while (proceed) {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 100; j++) {
-                if (map[i][j] == NULL) {
+                if (map[i][j] == NULL) { //ERROR
                     printf(" ");
                 } else {
-                    prinf(map[i][j]);
+                    printf(map[i][j]); //ERROR
                 }
             }
             printf("\n"); //Will print new line after each row
@@ -40,11 +41,11 @@ int main(int args, char* argv[]) {
         if (!argsCheck) {
             scanf("%s", input); 
         } else {
-            if (argsRunIndex == strlen(args)) {
+            if (argsRunIndex == argc) {
                 argsCheck = 1; //false
-                *input = *"e";
+                input = "e"; //ERROR
             } else {
-                *input = *argv[argsRunIndex];
+                input = *argv[argsRunIndex];
                 argsRunIndex++;
             }
 
@@ -52,7 +53,7 @@ int main(int args, char* argv[]) {
         }
         switch(input){
                 case 'w':
-                    map[currentPosition[1]][currentPosition[0]] = "#";
+                    map[currentPosition[1]][currentPosition[0]] = "#"; //ERROR
                     //saves the trail of where you have been
                     if(!((currentPosition[0] - directionX[currentDirection] < 0) || (currentPosition[0] - directionX[currentDirection] > 100)||(currentPosition[1] - directionY[currentDirection] < 0) || (currentPosition[1] - directionY[currentDirection] > 20))){
                         //checks if you're bumping into the edge
@@ -61,7 +62,7 @@ int main(int args, char* argv[]) {
                        
                     }
 
-                    map[currentPosition[1]][currentPosition[0]] = "P";
+                    map[currentPosition[1]][currentPosition[0]] = "P"; //ERROR
                     //puts your player icon down
                     break;
                 case 'a':
